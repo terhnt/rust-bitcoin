@@ -1,10 +1,10 @@
 ![Continuous integration](https://github.com/rust-bitcoin/rust-bitcoin/workflows/Continuous%20integration/badge.svg)
 [![Safety Dance](https://img.shields.io/badge/unsafe-forbidden-success.svg)](https://github.com/rust-secure-code/safety-dance/)
 
-# Rust Bitcoin Library
+# Rust Bitcoin Library - AUXPOW 
 
 Library with support for de/serialization, parsing and executing on data
-structures and network messages related to Bitcoin.
+structures and network messages related to Unobtanium.
 
 [Documentation](https://docs.rs/bitcoin/)
 
