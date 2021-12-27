@@ -318,7 +318,7 @@ mod test {
         assert_eq!(serialize(&Address {
             services: ServiceFlags::NETWORK,
             address: [0, 0, 0, 0, 0, 0xffff, 0x0a00, 0x0001],
-            port: 8333
+            port: 65534
         }),
         vec![1u8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
              0, 0, 0, 0xff, 0xff, 0x0a, 0, 0, 1, 0x20, 0x8d]);
@@ -331,7 +331,7 @@ mod test {
             format!("The address is: {:?}", Address {
                 services: flags.add(ServiceFlags::WITNESS),
                 address: [0, 0, 0, 0, 0, 0xffff, 0x0a00, 0x0001],
-                port: 8333
+                port: 65534
             }), 
             "The address is: Address {services: ServiceFlags(NETWORK|WITNESS), address: 10.0.0.1, port: 8333}"
         );
@@ -340,7 +340,7 @@ mod test {
             format!("The address is: {:?}", Address {
                 services: ServiceFlags::NETWORK_LIMITED,
                 address: [0xFD87, 0xD87E, 0xEB43, 0, 0, 0xffff, 0x0a00, 0x0001],
-                port: 8333
+                port: 65534
             }), 
             "The address is: Address {services: ServiceFlags(NETWORK_LIMITED), address: fd87:d87e:eb43::ffff:a00:1, port: 8333}"
         );
@@ -360,7 +360,7 @@ mod test {
             );
         assert_eq!(full.services, ServiceFlags::NETWORK);
         assert_eq!(full.address, [0, 0, 0, 0, 0, 0xffff, 0x0a00, 0x0001]);
-        assert_eq!(full.port, 8333);
+        assert_eq!(full.port, 65534);
 
         addr = deserialize(&[1u8, 0, 0, 0, 0, 0, 0, 0, 0,
                              0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 0x0a, 0, 0, 1]);
