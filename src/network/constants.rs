@@ -64,7 +64,7 @@ user_enum! {
     #[derive(Copy, PartialEq, Eq, PartialOrd, Ord, Clone, Hash, Debug)]
     pub enum Network {
         /// Classic Bitcoin
-        Bitcoin <-> "bitcoin",
+        Bitcoin <-> "unobtanium",
         /// Bitcoin's testnet
         Testnet <-> "testnet",
         /// Bitcoin's signet
@@ -88,10 +88,10 @@ impl Network {
     pub fn from_magic(magic: u32) -> Option<Network> {
         // Note: any new entries here must be added to `magic` below
         match magic {
-            0xD9B4BEF9 => Some(Network::Bitcoin),
-            0x0709110B => Some(Network::Testnet),
+            0x03b5d503 => Some(Network::Bitcoin),
+            0x04030201 => Some(Network::Testnet),
             0x40CF030A => Some(Network::Signet),
-            0xDAB5BFFA => Some(Network::Regtest),
+            0x01020304 => Some(Network::Regtest),
             _ => None
         }
     }
@@ -110,10 +110,10 @@ impl Network {
     pub fn magic(self) -> u32 {
         // Note: any new entries here must be added to `from_magic` above
         match self {
-            Network::Bitcoin => 0xD9B4BEF9,
-            Network::Testnet => 0x0709110B,
+            Network::Bitcoin => 0x03b5d503,
+            Network::Testnet => 0x04030201,
             Network::Signet  => 0x40CF030A,
-            Network::Regtest => 0xDAB5BFFA,
+            Network::Regtest => 0x01020304,
         }
     }
 }
@@ -298,50 +298,50 @@ mod tests {
     fn serialize_test() {
         assert_eq!(
             serialize(&Network::Bitcoin.magic()),
-            &[0xf9, 0xbe, 0xb4, 0xd9]
+            &[0x03, 0xd5, 0xb5, 0x03]
         );
         assert_eq!(
             serialize(&Network::Testnet.magic()),
-            &[0x0b, 0x11, 0x09, 0x07]
+            &[0x01, 0x02, 0x03, 0x04]
         );
-        assert_eq!(
-            serialize(&Network::Signet.magic()),
-            &[0x0a, 0x03, 0xcf, 0x40]
-        );
+        //assert_eq!(
+        //    serialize(&Network::Signet.magic()),
+        //    &[0x0a, 0x03, 0xcf, 0x40]
+        //);
         assert_eq!(
             serialize(&Network::Regtest.magic()),
-            &[0xfa, 0xbf, 0xb5, 0xda]
+           &[0x04, 0x03, 0x02, 0x01]
         );
 
         assert_eq!(
-            deserialize(&[0xf9, 0xbe, 0xb4, 0xd9]).ok(),
+            deserialize(&[0x03, 0xd5, 0xb5, 0x03]).ok(),
             Some(Network::Bitcoin.magic())
         );
         assert_eq!(
-            deserialize(&[0x0b, 0x11, 0x09, 0x07]).ok(),
+            deserialize(&[0x01, 0x02, 0x03, 0x04]).ok(),
             Some(Network::Testnet.magic())
         );
+        //assert_eq!(
+        //    deserialize(&[0x0a, 0x03, 0xcf, 0x40]).ok(),
+        //    Some(Network::Signet.magic())
+        //);
         assert_eq!(
-            deserialize(&[0x0a, 0x03, 0xcf, 0x40]).ok(),
-            Some(Network::Signet.magic())
-        );
-        assert_eq!(
-            deserialize(&[0xfa, 0xbf, 0xb5, 0xda]).ok(),
+            deserialize(&[0x04, 0x03, 0x02, 0x01]).ok(),
             Some(Network::Regtest.magic())
         );
     }
 
     #[test]
     fn string_test() {
-        assert_eq!(Network::Bitcoin.to_string(), "bitcoin");
+        assert_eq!(Network::Bitcoin.to_string(), "unobtanium");
         assert_eq!(Network::Testnet.to_string(), "testnet");
         assert_eq!(Network::Regtest.to_string(), "regtest");
-        assert_eq!(Network::Signet.to_string(), "signet");
+        //assert_eq!(Network::Signet.to_string(), "signet");
 
-        assert_eq!("bitcoin".parse::<Network>().unwrap(), Network::Bitcoin);
+        assert_eq!("unobtanium".parse::<Network>().unwrap(), Network::Bitcoin);
         assert_eq!("testnet".parse::<Network>().unwrap(), Network::Testnet);
         assert_eq!("regtest".parse::<Network>().unwrap(), Network::Regtest);
-        assert_eq!("signet".parse::<Network>().unwrap(), Network::Signet);
+        //assert_eq!("signet".parse::<Network>().unwrap(), Network::Signet);
         assert!("fakenet".parse::<Network>().is_err());
     }
 
