@@ -53,9 +53,9 @@ impl Denomination {
 impl fmt::Display for Denomination {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.write_str(match *self {
-            Denomination::Bitcoin => "BTC",
-            Denomination::MilliBitcoin => "mBTC",
-            Denomination::MicroBitcoin => "uBTC",
+            Denomination::Bitcoin => "UNO",
+            Denomination::MilliBitcoin => "mUNO",
+            Denomination::MicroBitcoin => "uUNO",
             Denomination::Bit => "bits",
             Denomination::Satoshi => "satoshi",
             Denomination::MilliSatoshi => "msat",
@@ -68,9 +68,9 @@ impl FromStr for Denomination {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "BTC" => Ok(Denomination::Bitcoin),
-            "mBTC" => Ok(Denomination::MilliBitcoin),
-            "uBTC" => Ok(Denomination::MicroBitcoin),
+            "UNO" => Ok(Denomination::Bitcoin),
+            "mUNO" => Ok(Denomination::MilliBitcoin),
+            "uUNO" => Ok(Denomination::MicroBitcoin),
             "bits" => Ok(Denomination::Bit),
             "satoshi" => Ok(Denomination::Satoshi),
             "sat" => Ok(Denomination::Satoshi),
@@ -271,7 +271,7 @@ impl Amount {
     /// Exactly one bitcoin.
     pub const ONE_BTC: Amount = Amount(100_000_000);
     /// The maximum value allowed as an amount. Useful for sanity checking.
-    pub const MAX_MONEY: Amount = Amount(21_000_000 * 100_000_000);
+    pub const MAX_MONEY: Amount = Amount(250_000 * 100_000_000);
 
     /// Create an [Amount] with satoshi precision and the given number of satoshis.
     pub fn from_sat(satoshi: u64) -> Amount {
@@ -435,7 +435,7 @@ impl default::Default for Amount {
 
 impl fmt::Debug for Amount {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Amount({:.8} BTC)", self.as_btc())
+        write!(f, "Amount({:.8} UNO)", self.as_btc())
     }
 }
 
@@ -535,7 +535,7 @@ impl ::core::iter::Sum for Amount {
 
 /// SignedAmount
 ///
-/// The [SignedAmount] type can be used to express Bitcoin amounts that supports
+/// The [SignedAmount] type can be used to express Unobtanium amounts that supports
 /// arithmetic and conversion to various denominations.
 ///
 ///
@@ -558,7 +558,7 @@ impl SignedAmount {
     /// Exactly one bitcoin.
     pub const ONE_BTC: SignedAmount = SignedAmount(100_000_000);
     /// The maximum value allowed as an amount. Useful for sanity checking.
-    pub const MAX_MONEY: SignedAmount = SignedAmount(21_000_000 * 100_000_000);
+    pub const MAX_MONEY: SignedAmount = SignedAmount(250_000 * 100_000_000);
 
     /// Create an [SignedAmount] with satoshi precision and the given number of satoshis.
     pub fn from_sat(satoshi: i64) -> SignedAmount {
@@ -769,7 +769,7 @@ impl default::Default for SignedAmount {
 
 impl fmt::Debug for SignedAmount {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "SignedAmount({:.8} BTC)", self.as_btc())
+        write!(f, "SignedAmount({:.8} UNO)", self.as_btc())
     }
 }
 
@@ -1077,7 +1077,7 @@ pub mod serde {
     }
 
     pub mod as_btc {
-        //! Serialize and deserialize [`Amount`](crate::Amount) as JSON numbers denominated in BTC.
+        //! Serialize and deserialize [`Amount`](crate::Amount) as JSON numbers denominated in UNO.
         //! Use with `#[serde(with = "amount::serde::as_btc")]`.
 
         use serde::{Deserializer, Serializer};
@@ -1092,7 +1092,7 @@ pub mod serde {
         }
 
         pub mod opt {
-            //! Serialize and deserialize [Option<Amount>] as JSON numbers denominated in BTC.
+            //! Serialize and deserialize [Option<Amount>] as JSON numbers denominated in UNO.
             //! Use with `#[serde(default, with = "amount::serde::as_btc::opt")]`.
 
             use serde::{Deserializer, Serializer, de};
@@ -1282,8 +1282,8 @@ mod tests {
         // Should this even pass?
         assert_eq!(p("5500000000000000000.", sat), Ok(Amount::from_sat(5_500_000_000_000_000_000)));
         assert_eq!(
-            p("12345678901.12345678", btc),
-            Ok(Amount::from_sat(12_345_678_901__123_456_78))
+            p("123456.12345678", btc),
+            Ok(Amount::from_sat(123_456__123_456_78))
         );
 
         // make sure satoshi > i64::max_value() is checked.
@@ -1307,16 +1307,16 @@ mod tests {
         assert_eq!(Amount::ONE_SAT.to_string_in(D::Bitcoin), "0.00000001");
         assert_eq!(SignedAmount::from_sat(-42).to_string_in(D::Bitcoin), "-0.00000042");
 
-        assert_eq!(Amount::ONE_BTC.to_string_with_denomination(D::Bitcoin), "1.00000000 BTC");
+        assert_eq!(Amount::ONE_BTC.to_string_with_denomination(D::Bitcoin), "1.00000000 UNO");
         assert_eq!(Amount::ONE_SAT.to_string_with_denomination(D::MilliSatoshi), "1000 msat");
         assert_eq!(
             SignedAmount::ONE_BTC.to_string_with_denomination(D::Satoshi),
             "100000000 satoshi"
         );
-        assert_eq!(Amount::ONE_SAT.to_string_with_denomination(D::Bitcoin), "0.00000001 BTC");
+        assert_eq!(Amount::ONE_SAT.to_string_with_denomination(D::Bitcoin), "0.00000001 UNO");
         assert_eq!(
             SignedAmount::from_sat(-42).to_string_with_denomination(D::Bitcoin),
-            "-0.00000042 BTC"
+            "-0.00000042 UNO"
         );
     }
 
@@ -1346,20 +1346,20 @@ mod tests {
         use super::ParseAmountError as E;
         let p = Amount::from_str;
         let sp = SignedAmount::from_str;
-
-        assert_eq!(p("x BTC"), Err(E::InvalidCharacter('x')));
-        assert_eq!(p("5 BTC BTC"), Err(E::InvalidFormat));
-        assert_eq!(p("5 5 BTC"), Err(E::InvalidFormat));
+        
+        assert_eq!(p("x UNO"), Err(E::InvalidCharacter('x')));
+        assert_eq!(p("5 UNO UNO"), Err(E::InvalidFormat));
+        assert_eq!(p("5 5 UNO"), Err(E::InvalidFormat));
 
         assert_eq!(p("5 BCH"), Err(E::UnknownDenomination("BCH".to_owned())));
 
-        assert_eq!(p("-1 BTC"), Err(E::Negative));
-        assert_eq!(p("-0.0 BTC"), Err(E::Negative));
-        assert_eq!(p("0.123456789 BTC"), Err(E::TooPrecise));
+        assert_eq!(p("-1 UNO"), Err(E::Negative));
+        assert_eq!(p("-0.0 UNO"), Err(E::Negative));
+        assert_eq!(p("0.123456789 UNO"), Err(E::TooPrecise));
         assert_eq!(sp("-0.1 satoshi"), Err(E::TooPrecise));
-        assert_eq!(p("0.123456 mBTC"), Err(E::TooPrecise));
+        assert_eq!(p("0.123456 mUNO"), Err(E::TooPrecise));
         assert_eq!(sp("-1.001 bits"), Err(E::TooPrecise));
-        assert_eq!(sp("-200000000000 BTC"), Err(E::TooBig));
+        assert_eq!(sp("-200000000000 UNO"), Err(E::TooBig));
         assert_eq!(p("18446744073709551616 sat"), Err(E::TooBig));
 
         assert_eq!(sp("0 msat"), Err(E::TooPrecise));
@@ -1373,9 +1373,9 @@ mod tests {
 
         assert_eq!(p(".5 bits"), Ok(Amount::from_sat(50)));
         assert_eq!(sp("-.5 bits"), Ok(SignedAmount::from_sat(-50)));
-        assert_eq!(p("0.00253583 BTC"), Ok(Amount::from_sat(253583)));
+        assert_eq!(p("0.00253583 UNO"), Ok(Amount::from_sat(253583)));
         assert_eq!(sp("-5 satoshi"), Ok(SignedAmount::from_sat(-5)));
-        assert_eq!(p("0.10000000 BTC"), Ok(Amount::from_sat(100_000_00)));
+        assert_eq!(p("0.10000000 UNO"), Ok(Amount::from_sat(100_000_00)));
         assert_eq!(sp("-100 bits"), Ok(SignedAmount::from_sat(-10_000)));
     }
 
@@ -1421,8 +1421,8 @@ mod tests {
         assert_eq!(Amount::from_str(&denom(amt, D::Satoshi)), Ok(amt));
         assert_eq!(Amount::from_str(&denom(amt, D::MilliSatoshi)), Ok(amt));
 
-        assert_eq!(Amount::from_str("42 satoshi BTC"), Err(ParseAmountError::InvalidFormat));
-        assert_eq!(SignedAmount::from_str("-42 satoshi BTC"), Err(ParseAmountError::InvalidFormat));
+        assert_eq!(Amount::from_str("42 satoshi UNO"), Err(ParseAmountError::InvalidFormat));
+        assert_eq!(SignedAmount::from_str("-42 satoshi UNO"), Err(ParseAmountError::InvalidFormat));
     }
 
     #[cfg(feature = "serde")]
@@ -1470,12 +1470,12 @@ mod tests {
         }
 
         let orig = T {
-            amt: Amount::from_sat(21_000_000__000_000_01),
-            samt: SignedAmount::from_sat(-21_000_000__000_000_01),
+            amt: Amount::from_sat(250_000__000_000_01),
+            samt: SignedAmount::from_sat(-215_000__000_000_01),
         };
 
-        let json = "{\"amt\": 21000000.00000001, \
-                    \"samt\": -21000000.00000001}";
+        let json = "{\"amt\": 250000.00000001, \
+                    \"samt\": -250000.00000001}";
         let t: T = serde_json::from_str(&json).unwrap();
         assert_eq!(t, orig);
 
