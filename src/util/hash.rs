@@ -24,7 +24,7 @@ use prelude::*;
 use io;
 use core::cmp::min;
 
-use hashes::Hash;
+use hashes::{sha256d, Hash};
 use consensus::encode::Encodable;
 
 /// Calculates the merkle root of a list of *hashes*, inline (in place) in `hashes`.
@@ -102,6 +102,12 @@ fn merkle_root_r<T>(hashes: &mut [T]) -> T
     let half_len = hashes.len() / 2 + hashes.len() % 2;
 
     merkle_root_r(&mut hashes[0..half_len])
+}
+
+/// Objects which are referred to by hash - for addrindex
+pub trait BitcoinHash {
+    /// Produces a Sha256dHash which can be used to refer to the object
+    fn bitcoin_hash(&self) -> sha256d::Hash;
 }
 
 #[cfg(test)]
