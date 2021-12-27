@@ -229,7 +229,7 @@ impl PrivateKey {
         let mut ret = [0; 34];
         ret[0] = match self.network {
             Network::Bitcoin => 224,
-            Network::Testnet => 239,
+            Network::Testnet | Network::Signet => 239,
             Network::Regtest => 128,
         };
         ret[1..33].copy_from_slice(&self.key[..]);
