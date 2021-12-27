@@ -27,7 +27,7 @@ use core::fmt;
 use util;
 use util::Error::{BlockBadTarget, BlockBadProofOfWork};
 use util::hash::bitcoin_merkle_root;
-use hashes::{sha256d, Hash, HashEngine};
+use hashes::{Hash, HashEngine};
 use hash_types::{Wtxid, BlockHash, TxMerkleNode, WitnessMerkleNode, WitnessCommitment};
 use util::uint::Uint256;
 use consensus::encode::Encodable;
@@ -42,10 +42,10 @@ use VarInt;
 pub struct BlockHeaderAuxPow {
     pub block_header: BlockHeader,
 	pub tx_aux_pow: Transaction,
-	pub hash_block: sha256d::Hash,
-	pub merkle_branch: Vec<sha256d::Hash>,
-    pub n_index: u32,
-	pub chain_merkle_branch: Vec<sha256d::Hash>,
+	pub hash_block: BlockHash,
+	pub merkle_branch: TxMerkleNode,
+        pub n_index: u32,
+	pub chain_merkle_branch: TxMerkleNode,
 	pub chain_index: u32,
 	pub parent_block: BlockHeader,
 }
