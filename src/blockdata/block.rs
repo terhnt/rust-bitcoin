@@ -27,7 +27,7 @@ use core::fmt;
 use util;
 use util::Error::{BlockBadTarget, BlockBadProofOfWork};
 use util::hash::bitcoin_merkle_root;
-use hashes::{Hash, HashEngine};
+use hashes::{sha256d, Hash, HashEngine};
 use hash_types::{Wtxid, BlockHash, TxMerkleNode, WitnessMerkleNode, WitnessCommitment};
 use util::uint::Uint256;
 use consensus::encode::Encodable;
@@ -42,10 +42,10 @@ use VarInt;
 pub struct BlockHeaderAuxPow {
     pub block_header: BlockHeader,
 	pub tx_aux_pow: Transaction,
-	pub hash_block: BlockHash,
-	pub merkle_branch: TxMerkleNode,
+	pub hash_block: sha256d::Hash,
+	pub merkle_branch: Vec<sha256d::Hash>,
         pub n_index: u32,
-	pub chain_merkle_branch: TxMerkleNode,
+	pub chain_merkle_branch: Vec<sha256d::Hash>,
 	pub chain_index: u32,
 	pub parent_block: BlockHeader,
 }
@@ -187,6 +187,19 @@ pub struct Block {
     pub header: BlockHeader,
     /// List of transactions contained in the block
     pub txdata: Vec<Transaction>
+}
+
+impl BitcoinHash for BlockHeader {
+    fn bitcoin_hash(&self) -> sha256d::Hash {
+        use consensus::encode::serialize;
+        sha256d::Hash::hash(&serialize(self))
+    }
+}
+
+impl BitcoinHash for Block {
+    fn bitcoin_hash(&self) -> sha256d::Hash {
+        self.header.bitcoin_hash()
+    }
 }
 
 impl_consensus_encoding!(BlockHeader, version, prev_blockhash, merkle_root, time, bits, nonce);
@@ -348,7 +361,7 @@ impl fmt::Display for Bip34Error {
         }
     }
 }
-
+/*
 #[cfg(feature = "std")]
 impl ::std::error::Error for Bip34Error {}
 
@@ -546,4 +559,5 @@ mod benches {
             black_box(&block);
         });
     }
+	*/
 }
