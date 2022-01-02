@@ -32,6 +32,21 @@ use blockdata::transaction::Transaction;
 use blockdata::constants::max_target;
 use hashes::HashEngine;
 
+/// A block header with the aux pow info
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct BlockHeaderAuxPow {
+    pub block_header: BlockHeader,
+	pub tx_aux_pow: Transaction,
+	pub hash_block: sha256d::Hash,
+	pub merkle_branch: Vec<sha256d::Hash>,
+    pub n_index: u32,
+	pub chain_merkle_branch: Vec<sha256d::Hash>,
+	pub chain_index: u32,
+	pub parent_block: BlockHeader,
+}
+
+impl_consensus_encoding!(BlockHeaderAuxPow, block_header, tx_aux_pow, hash_block, merkle_branch, n_index, chain_merkle_branch, chain_index, parent_block);
+
 /// A block header, which contains all the block's information except
 /// the actual transactions
 #[derive(Copy, PartialEq, Eq, Clone, Debug)]
@@ -50,6 +65,16 @@ pub struct BlockHeader {
     /// The nonce, selected to obtain a low enough blockhash
     pub nonce: u32,
 }
+
+
+/// AUXPOW Block
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct BlockAuxPow {
+    pub aux_pow_header: BlockHeaderAuxPow,
+	pub txdata: Vec<Transaction>
+}
+
+impl_consensus_encoding!(BlockAuxPow, aux_pow_header, txdata);
 
 /// A Bitcoin block, which is a collection of transactions with an attached
 /// proof of work.
@@ -280,4 +305,3 @@ mod tests {
         assert_eq!(header.bits, BlockHeader::compact_target_from_u256(&header.target()));
     }
 }
-
