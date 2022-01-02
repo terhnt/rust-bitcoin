@@ -60,7 +60,7 @@ user_enum! {
     #[derive(Copy, PartialEq, Eq, PartialOrd, Ord, Clone, Hash)]
     pub enum Network {
         /// Classic Bitcoin
-        Unobtanium <-> "bitcoin", // TODO: Change to unobtanium
+        Bitcoin <-> "bitcoin", // TODO: Change to unobtanium
         /// Bitcoin's testnet
         Testnet <-> "testnet",
         /// Bitcoin's regtest
