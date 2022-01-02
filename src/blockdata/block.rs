@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -12,7 +12,7 @@
 // If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 //
 
-//! Bitcoin Block
+//! Unobtanium Block
 //!
 //! A block is a bundle of transactions with a proof-of-work attached,
 //! which commits to an earlier block to form the blockchain. This
@@ -76,7 +76,7 @@ pub struct BlockAuxPow {
 
 impl_consensus_encoding!(BlockAuxPow, aux_pow_header, txdata);
 
-/// A Bitcoin block, which is a collection of transactions with an attached
+/// A Unobtanium block, which is a collection of transactions with an attached
 /// proof of work.
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct Block {

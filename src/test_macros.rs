@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //

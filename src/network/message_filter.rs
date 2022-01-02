@@ -20,7 +20,7 @@ impl_consensus_encoding!(GetCFilters, filter_type, start_height, stop_hash);
 pub struct CFilter {
     /// Byte identifying the type of filter being returned
     pub filter_type: u8,
-    /// Block hash of the Bitcoin block for which the filter is being returned
+    /// Block hash of the Unobtanium block for which the filter is being returned
     pub block_hash: sha256d::Hash,
     /// The serialized compact filter for this block
     pub filter: Vec<u8>,

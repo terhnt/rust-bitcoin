@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2015 by
 //   Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -29,7 +29,7 @@ use std::{error, fmt};
 use network::constants::Network;
 use util::address;
 
-/// Encoding of "pubkey here" in script; from Bitcoin Core `src/script/script.h`
+/// Encoding of "pubkey here" in script; from Unobtanium Core `src/script/script.h`
 static PUBKEY: u8 = 0xFE;
 
 /// A contract-hash error

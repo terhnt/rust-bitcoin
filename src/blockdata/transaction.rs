@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -12,7 +12,7 @@
 // If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 //
 
-//! Bitcoin Transaction
+//! Unobtanium Transaction
 //!
 //! A transaction describes a transfer of money. It consumes previously-unspent
 //! transaction outputs and produces new ones, satisfying the condition to spend
@@ -220,7 +220,7 @@ impl Default for TxOut {
     }
 }
 
-/// A Bitcoin transaction, which describes an authenticated movement of coins.
+/// A Unobtanium transaction, which describes an authenticated movement of coins.
 ///
 /// If any inputs have nonempty witnesses, the entire transaction is serialized
 /// in the post-BIP141 Segwit format which includes a list of witnesses. If all
@@ -246,7 +246,7 @@ impl Default for TxOut {
 /// in the original transaction format (since it has no inputs and therefore
 /// no input witnesses), a traditionally encoded transaction may have the `0001`
 /// Segwit flag in it, which confuses most Segwit parsers including the one in
-/// Bitcoin Core.
+/// Unobtanium Core.
 ///
 /// We therefore deviate from the spec by always using the Segwit witness encoding
 /// for 0-input transactions, which results in unambiguously parseable transactions.
@@ -640,7 +640,7 @@ mod tests {
                    Err(ParseOutPointError::Txid(sha256d::Hash::from_hex("5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c945X").unwrap_err())));
         assert_eq!(OutPoint::from_str("5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456:lol"),
                    Err(ParseOutPointError::Vout(u32::from_str("lol").unwrap_err())));
- 
+
         assert_eq!(OutPoint::from_str("5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456:42"),
                    Ok(OutPoint{
                        txid: sha256d::Hash::from_hex("5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456").unwrap(),
@@ -681,7 +681,7 @@ mod tests {
         // will also fail. But these will show you where the failure is so I'll leave them in.
         assert_eq!(realtx.version, 1);
         assert_eq!(realtx.input.len(), 1);
-        // In particular this one is easy to get backward -- in bitcoin hashes are encoded
+        // In particular this one is easy to get backward -- in unobtanium hashes are encoded
         // as little-endian 256-bit numbers rather than as data strings.
         assert_eq!(format!("{:x}", realtx.input[0].previous_output.txid),
                    "ce9ea9f6f5e422c6a9dbcddb3b9a14d1c78fab9ab520cb281aa2a74a09575da1".to_string());
@@ -1162,4 +1162,3 @@ mod tests {
         }
     }
 }
-

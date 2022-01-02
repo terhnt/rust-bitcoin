@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 // To the extent possible under law, the author(s) have dedicated all
@@ -11,9 +11,9 @@
 // If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 //
 
-//! Bitcoin Keys
+//! Unobtanium Keys
 //!
-//! Keys used in Bitcoin that can be roundtrip (de)serialized.
+//! Keys used in Unobtanium that can be roundtrip (de)serialized.
 //!
 
 use std::fmt::{self, Write};
@@ -25,7 +25,7 @@ use consensus::encode;
 use network::constants::Network;
 use util::base58;
 
-/// A Bitcoin ECDSA public key
+/// A Unobtanium ECDSA public key
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct PublicKey {
     /// Whether this public key should be serialized as compressed
@@ -99,7 +99,7 @@ impl FromStr for PublicKey {
 }
 
 #[derive(Copy, Clone, PartialEq, Eq)]
-/// A Bitcoin ECDSA private key
+/// A Unobtanium ECDSA private key
 pub struct PrivateKey {
     /// Whether this private key should be serialized as compressed
     pub compressed: bool,

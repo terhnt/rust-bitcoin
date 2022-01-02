@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -12,10 +12,10 @@
 // If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 //
 
-//! Bitcoin network addresses
+//! Unobtanium network addresses
 //!
 //! This module defines the structures and functions needed to encode
-//! network addresses in Bitcoin messages.
+//! network addresses in Unobtanium messages.
 //!
 
 use std::io;
@@ -24,7 +24,7 @@ use std::net::{SocketAddr, Ipv6Addr, SocketAddrV4, SocketAddrV6};
 
 use consensus::encode::{self, Decodable, Encodable};
 
-/// A message which can be sent on the Bitcoin network
+/// A message which can be sent on the Unobtanium network
 pub struct Address {
     /// Services provided by the peer whose address this is
     pub services: u64,

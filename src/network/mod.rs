@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //   Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -15,7 +15,7 @@
 //! Network Support
 //!
 //! This module defines support for (de)serialization and network transport 
-//! of Bitcoin data and network messages.
+//! of Unobtanium data and network messages.
 //!
 
 use std::fmt;

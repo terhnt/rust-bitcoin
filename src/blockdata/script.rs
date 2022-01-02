@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -39,7 +39,7 @@ use hashes::{hash160, sha256, Hash};
 use util::key::PublicKey;
 
 #[derive(Clone, Default, PartialOrd, Ord, PartialEq, Eq, Hash)]
-/// A Bitcoin script
+/// A Unobtanium script
 pub struct Script(Box<[u8]>);
 
 impl fmt::Debug for Script {

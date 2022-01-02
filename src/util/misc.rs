@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -20,7 +20,7 @@ use hashes::{sha256d, Hash};
 use blockdata::opcodes;
 use consensus::encode;
 
-static MSG_SIGN_PREFIX: &'static [u8] = b"\x18Bitcoin Signed Message:\n";
+static MSG_SIGN_PREFIX: &'static [u8] = b"\x1bUnobtanium Signed Message:\n";
 
 /// Helper function to convert hex nibble characters to their respective value
 #[inline]
@@ -232,4 +232,3 @@ mod tests {
         assert_eq!(hash.to_hex(), "a6f87fe6d58a032c320ff8d1541656f0282c2c7bfcc69d61af4c8e8ed528e49c");
     }
 }
-

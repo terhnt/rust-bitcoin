@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -15,7 +15,7 @@
 //! Network message
 //!
 //! This module defines the `Message` traits which are used
-//! for (de)serializing Bitcoin objects for transmission on the network. It
+//! for (de)serializing Unobtanium objects for transmission on the network. It
 //! also defines (de)serialization routines for many primitives.
 //!
 

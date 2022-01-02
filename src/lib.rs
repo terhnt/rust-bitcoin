@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //   Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -12,9 +12,9 @@
 // If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 //
 
-//! # Rust Bitcoin Library
+//! # Rust Unobtanium Library
 //!
-//! This is a library for which supports the Bitcoin network protocol and associated
+//! This is a library for which supports the Unobtanium network protocol and associated
 //! primitives. It is designed for Rust programs built to work with the Bitcoin
 //! network.
 //!

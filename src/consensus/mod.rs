@@ -1,6 +1,6 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written by
-//   The Rust Bitcoin developers
+//   The Rust Unobtanium developers
 //
 // To the extent possible under law, the author(s) have dedicated all
 // copyright and related and neighboring rights to this software to
@@ -15,7 +15,7 @@
 //! Consensus
 //!
 //! This module defines structures, functions, and traits which are needed to
-//! conform to Bitcoin consensus.
+//! conform to Unobtanium consensus.
 //!
 
 pub mod encode;

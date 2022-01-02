@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -15,7 +15,7 @@
 //! Blockdata network messages
 //!
 //! This module describes network messages which are used for passing
-//! Bitcoin data (blocks and transactions) around.
+//! Unobtanium data (blocks and transactions) around.
 //!
 
 use network::constants;
@@ -67,7 +67,7 @@ pub struct GetHeadersMessage {
     pub stop_hash: sha256d::Hash
 }
 
-/// An inventory object --- a reference to a Bitcoin object
+/// An inventory object --- a reference to a Unobtanium object
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct Inventory {
     /// The type of object that is referenced

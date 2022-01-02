@@ -128,7 +128,7 @@
 # 0.13.1
 
 * Add `Display` trait to uints, `FromStr` trait to `Network` enum
-* Add witness inv types to inv enum, constants for Bitcoin regtest network, `is_coin_base` accessor for tx inputs
+* Add witness inv types to inv enum, constants for Unobtanium regtest network, `is_coin_base` accessor for tx inputs
 * Expose `merkleroot(Vec<Sha256dHash>)`
 
 # 0.13
@@ -141,7 +141,7 @@
 
 * The in-memory blockchain was moved into a dedicated project rust-bitcoin-chain.
 * Removed old script interpreter
-* A new optional feature "bitcoinconsensus" lets this library use Bitcoin Core's native
+* A new optional feature "bitcoinconsensus" lets this library use Unobtanium Core's native
 script verifier, wrappend into Rust by the rust-bitcoinconsenus project.
 See `Transaction::verify` and `Script::verify` methods.
 * Replaced Base58 traits with `encode_slice`, `check_encode_slice`, from and `from_check` functions in the base58 module.

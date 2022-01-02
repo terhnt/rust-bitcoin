@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -91,7 +91,7 @@ mod test {
     use network::message::{NetworkMessage, RawNetworkMessage};
 
     // First, let's define some byte arrays for sample messages - dumps are taken from live
-    // Bitcoin Core node v0.17.1 with Wireshark
+    // Unobtanium Core node v0.17.1 with Wireshark
     const MSG_VERSION: [u8; 126] = [
         0xf9, 0xbe, 0xb4, 0xd9, 0x76, 0x65, 0x72, 0x73,
         0x69, 0x6f, 0x6e, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -235,7 +235,7 @@ mod test {
     // Helper function that set ups emulation of client-server TCP connection for
     // testing message transfer via TCP packets
     fn serve_tcp(pieces: Vec<Vec<u8>>) -> (JoinHandle<()>, BufReader<TcpStream>) {
-        // 1. Creating server part (emulating Bitcoin Core node)
+        // 1. Creating server part (emulating Unobtanium Core node)
         let listener = TcpListener::bind(format!("127.0.0.1:{}", 0)).unwrap();
         let port = listener.local_addr().unwrap().port();
         // 2. Spawning thread that will be writing our messages to the TCP Stream at the server side
@@ -285,7 +285,7 @@ mod test {
     fn read_sequencemsg_test() {
         // Setting up TCP connection emulation
         let (handle, istream) = serve_tcp(vec![
-            // Real-world Bitcoin core communication case for /Satoshi:0.17.1/
+            // Real-world Unobtanium core communication case for /Satoshi:0.17.1/
             MSG_VERSION[..23].to_vec(), MSG_VERSION[23..].to_vec(),
             MSG_VERACK.to_vec(),
             MSG_ALERT[..24].to_vec(), MSG_ALERT[24..].to_vec()

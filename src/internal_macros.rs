@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -14,7 +14,7 @@
 
 //! Internal Macros
 //!
-//! Macros meant to be used inside the Rust Bitcoin library
+//! Macros meant to be used inside the Rust Unobtanium library
 
 macro_rules! impl_consensus_encoding {
     ($thing:ident, $($field:ident),+) => (

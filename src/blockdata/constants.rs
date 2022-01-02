@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //     Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -93,7 +93,7 @@ pub fn max_money(_: Network) -> u64 {
     250_000 * COIN_VALUE
 }
 
-/// Constructs and returns the coinbase (and only) transaction of the Bitcoin genesis block
+/// Constructs and returns the coinbase (and only) transaction of the Unobtanium genesis block
 fn bitcoin_genesis_tx() -> Transaction {
     // Base
     let mut ret = Transaction {

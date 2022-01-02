@@ -1,4 +1,4 @@
-// Rust Bitcoin Library
+// Rust Unobtanium Library
 // Written in 2014 by
 //   Andrew Poelstra <apoelstra@wpsoftware.net>
 //
@@ -14,7 +14,7 @@
 
 //! Network constants
 //!
-//! This module provides various constants relating to the Bitcoin network
+//! This module provides various constants relating to the Unobtanium network
 //! protocol, such as protocol versioning and magic header bytes.
 //!
 //! The [`Network`][1] type implements the [`Decodable`][2] and
@@ -60,7 +60,7 @@ user_enum! {
     #[derive(Copy, PartialEq, Eq, PartialOrd, Ord, Clone, Hash)]
     pub enum Network {
         /// Classic Bitcoin
-        Bitcoin <-> "bitcoin", // TODO: Change to unobtanium
+        Unobtanium <-> "bitcoin", // TODO: Change to unobtanium
         /// Bitcoin's testnet
         Testnet <-> "testnet",
         /// Bitcoin's regtest
@@ -76,7 +76,7 @@ impl Network {
     /// ```rust
     /// use bitcoin::network::constants::Network;
     ///
-    /// assert_eq!(Some(Network::Bitcoin), Network::from_magic(0xD9B4BEF9));
+    /// assert_eq!(Some(Network::Bitcoin), Network::from_magic(0x03b5d503));
     /// assert_eq!(None, Network::from_magic(0xFFFFFFFF));
     /// ```
     pub fn from_magic(magic: u32) -> Option<Network> {

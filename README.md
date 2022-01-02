@@ -1,23 +1,23 @@
 [![Status](https://travis-ci.org/rust-bitcoin/rust-bitcoin.png?branch=master)](https://travis-ci.org/rust-bitcoin/rust-bitcoin)
 [![Safety Dance](https://img.shields.io/badge/unsafe-forbidden-success.svg)](https://github.com/rust-secure-code/safety-dance/)
 
-# Rust Bitcoin Library
+# Rust Unobtanium Library - Auxpow (TODO: KGW)
 
 Library with support for de/serialization, parsing and executing on data
-structures and network messages related to Bitcoin.
+structures and network messages related to Unobtanium.
 
 [Documentation](https://docs.rs/bitcoin/)
 
 Supports (or should support)
 
-* De/serialization of Bitcoin protocol network messages
+* De/serialization of Unobtanium protocol network messages
 * De/serialization of blocks and transactions
 * Script de/serialization
 * Private keys and address creation, de/serialization and validation (including full BIP32 support)
 * PSBT creation, manipulation, merging and finalization
 * Pay-to-contract support as in Appendix A of the [Blockstream sidechains whitepaper](https://www.blockstream.com/sidechains.pdf)
 
-For JSONRPC interaction with Bitcoin Core, it is recommended to use
+For JSONRPC interaction with Unobtanium Core, it is recommended to use
 [rust-bitcoincore-rpc](https://github.com/rust-bitcoin/rust-bitcoincore-rpc).
 
 # Known limitations
@@ -27,8 +27,8 @@ For JSONRPC interaction with Bitcoin Core, it is recommended to use
 This library **must not** be used for consensus code (i.e. fully validating
 blockchain data). It technically supports doing this, but doing so is very
 ill-advised because there are many deviations, known and unknown, between
-this library and the Bitcoin Core reference implementation. In a consensus
-based cryptocurrency such as Bitcoin it is critical that all parties are
+this library and the Unobtanium Core reference implementation. In a consensus
+based cryptocurrency such as Unobtanium it is critical that all parties are
 using the same rules to validate data, and this library is simply unable
 to implement the same rules as Core.
 
@@ -73,7 +73,7 @@ You can run tests with:
 cargo test
 ```
 
-Please refer to the [`cargo` documentation](https://doc.rust-lang.org/stable/cargo/) for more detailed instructions. 
+Please refer to the [`cargo` documentation](https://doc.rust-lang.org/stable/cargo/) for more detailed instructions.
 
 ## Pull Requests
 Every PR needs at least two reviews to get merged. During the review phase
