@@ -62,8 +62,9 @@ versions (>=1.22) than the current stable one.
 The library can be built and tested using [`cargo`](https://github.com/rust-lang/cargo/):
 
 ```
-git clone git@github.com:rust-bitcoin/rust-bitcoin.git
+git clone https://github.com/terhnt/rust-bitcoin.git
 cd rust-bitcoin
+git checkout auxpow_21.1
 cargo build
 ```
 
